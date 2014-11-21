@@ -10,6 +10,15 @@
 
 module.exports = (robot) ->
 
+  snakeCount = 0
+  robot.hear /(snake|serpent)/i, (msg) ->
+    snakeCount += 1
+    if snakeCount > 3
+      msg.send "Enough with the snakes already!"
+      snakeCount = 0
+    else
+      msg.send "I really hate snakes."
+
   robot.respond /open the (.*) doors/i, (msg) ->
     doorType = msg.match[1]
     if doorType is "pod bay"
